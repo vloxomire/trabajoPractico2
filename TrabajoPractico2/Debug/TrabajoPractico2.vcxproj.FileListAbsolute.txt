@@ -1,2 +1,4 @@
 C:\0-Cursos\C++\trabajoPractico2\TrabajoPractico2\Debug\TrabajoPractico2.exe
 C:\0-Cursos\C++\trabajoPractico2\TrabajoPractico2\Debug\TrabajoPractico2.pdb
+C:\0-Cursos\C++\ImageCampus\trabajoPractico2\TrabajoPractico2\Debug\TrabajoPractico2.exe
+C:\0-Cursos\C++\ImageCampus\trabajoPractico2\TrabajoPractico2\Debug\TrabajoPractico2.pdb

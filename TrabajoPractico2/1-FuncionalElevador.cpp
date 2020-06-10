@@ -7,20 +7,22 @@ y seguir indicando antes o después del gráfico mediante texto donde se encuent
 #include<time.h>
 struct Edificio
 {
-	short pisosFinal = 5;
+	short pisoFinal = 5;
 	short pisoInicial = 0;
 	short pisoActual = 0;
+	short pisoRandom = 0;
 	short rangoAscensor = 2;
 	short menu = 0;
 };
-void PisoRandom(Edificio e);
+short PisoRandom(Edificio e);
 void Grafico(Edificio e);
+void Mover(Edificio e,short);
+void Inicio(Edificio e, short);
 
 int
 main()
 {
-	
-	
+	short aux = 0;
 	Edificio edificio;
 	std::cout << "Ingrese la cantidad de pisos\n";
 	//std::cin >> pisos;
@@ -28,123 +30,122 @@ main()
 	//std::cin >> rangoAsc;
 
 	int pisoInicial;
-	
-/*	
-	do
-	{
-		std::cout << "piso actual " << pisoInicial << std::endl;
-		if (pisoInicial == 0)
-		{
-			std::cout << "puede subir " << std::endl;
-			std::cout << "pisos"<<std::endl;
-		
-			std::cout << "\n";
-			for (short i = pisosTotal-rangoAsc; i >=pisoInicial; i--)
-	{
-		if (i<=rangoAsc)
-		{
-			if (i == 0)
-			{
-				std::cout << i + pisoInicial << " A" << std::endl;
-			}
-			else
-			{
-				std::cout << i + pisoInicial << " |" << std::endl;
-			}
-		}
-	}
-			std::cin >> menu;
-			menu = pisoInicial;
-		}
-		//PISO FINAL
-		if (pisoInicial == pisosTotal)
-		{
-			std::cout << "puede bajar " << std::endl;
-			for (short i = 10; i > pisosTotal - rangoAsc; i--)
-			{
-				std::cout << i - 1 << ",";
-			}
-			std::cout << "\n";
-			for (short i = pisosTotal - rangoAsc; i >= pisoInicial; i--)
-			{
-				if (i <= rangoAsc)
-				{
-					if (i == 0)
-					{
-						std::cout << i + pisoInicial << " A" << std::endl;
-					}
-					else
-					{
-						std::cout << i + pisoInicial << " |" << std::endl;
-					}
-				}
-			}
-			std::cin >> menu;
-			pisoInicial = menu;
-		}
-		//ENTRE PISOS
-		else if (pisoInicial < pisosTotal || pisoInicial > 0)
-		{
-			std::cout << "puede subir  " << std::endl;
-			for (short i = pisoInicial + 1; i <= pisosTotal; i++)
-			{
-				if (i <= pisoInicial + rangoAsc)
-				{
-					std::cout << i << ",";
-				}
-			}
-			std::cout << "\n";
-			std::cout << "o bajar\n";
-			for (short i = pisoInicial; i > pisoInicial - rangoAsc; i--)
-			{
-				if (i > 0)
-				{
-					std::cout << i - 1 << ",";
-				}
-			}
-			std::cout << "\n";
-			std::cin >> menu;
-			pisoInicial = menu;
-		}
-		system("CLS");
-	} while (pisoInicial != 0);
-
-	for (short i = pisosTotal-rangoAsc; i >=pisoInicial; i--)
-	{
-		if (i<=rangoAsc)
-		{
-			if (i == 0)
-			{
-				std::cout << i + pisoInicial << " A" << std::endl;
-			}
-			else
-			{
-				std::cout << i + pisoInicial << " |" << std::endl;
-			}
-		}
-	}*/
-	PisoRandom(edificio);
+	aux=PisoRandom(edificio);
+	Mover(edificio,aux);
 	return 0;
 }
 
 void Grafico(Edificio e)
 {
-	for (size_t i = e.pisosFinal; i > e.pisoInicial; i--)
+	for (short i = e.pisoFinal; i >= e.pisoInicial; i--)
 	{
-		if (i==e.pisoActual)
+		if (i == e.pisoActual)
 		{
-			std::cout<<i<<")"<< 'A' << std::endl;
+			std::cout << i << ")" << 'A' << std::endl;
 		}
-		else 
+		else
 		{
 			std::cout << i << ")" << 'I' << std::endl;
 		}
 	}
 }
-void PisoRandom(Edificio e) 
+void Mover(Edificio e,short a)
 {
+	short menu = 0;
+	a = e.pisoActual;
+	do
+	{
+		//piso en 0
+		Inicio(e,menu);
+
+		//PISO FINAL
+		if (e.pisoActual == e.pisoFinal)
+		{//muestra los pisos a subir
+			std::cout << "puede bajar " << std::endl;
+			std::cout << " A los pisos ";
+			//me da los pisos
+			for (short i = e.pisoFinal; i > e.pisoFinal - e.rangoAscensor; i--)
+			{
+				std::cout << i - 1 << ",";
+			}
+			std::cout << "\n";
+			//valores validos
+			do
+			{
+				std::cin >> menu;
+			} while (menu>e.pisoFinal && menu< e.pisoFinal - e.rangoAscensor);
+			e.pisoActual = menu;
+			Grafico(e);
+		}
+		//ENTRE PISOS
+		else
+		{
+			std::cout << "puede subir " << std::endl;
+			std::cout << " A los pisos ";
+			for (short i = e.pisoActual + 1; i <= e.pisoFinal; i++)
+			{
+				if (i <= e.pisoActual+ e.rangoAscensor)
+				{
+					std::cout << i << ",";
+				}
+			}
+			std::cout << "\n";
+			std::cout << "o bajar " << std::endl;
+			std::cout << " A los pisos ";
+			for (short i = e.pisoActual; i > e.pisoActual - e.rangoAscensor; i--)//3>=(3-2)
+			{
+				if (i >= e.pisoInicial)
+				{
+					std::cout << i << ",";
+				}
+			}
+			std::cout << "\n";
+			do
+			{
+				std::cin >> menu;
+			} while (menu<e.pisoInicial && menu>e.pisoFinal);
+			e.pisoActual = menu;
+			Grafico(e);
+		}
+	} while (e.pisoActual != 0);
+}
+short PisoRandom(Edificio e)
+{
+	short aux = 0;
 	srand(time(NULL));
-	e.pisoActual=rand() % e.pisosFinal+1;
-	std::cout << "Piso Actual "<< e.pisoActual << std::endl;
+	e.pisoRandom = rand() % e.pisoFinal;
+	aux = e.pisoRandom;
+	std::cout << "Piso Actual " << e.pisoActual << std::endl;
 	Grafico(e);
+	return aux;
+};
+void Inicio(Edificio e, short m) 
+{
+	short menu = m;
+	if (e.pisoActual == 0)
+	{//muestra los pisos a subir
+		std::cout << "puede subir " << std::endl;
+		std::cout << " A los pisos ";
+		//me da los pisos
+		for (short i = e.pisoInicial + 1; i <= e.rangoAscensor; i++)//0<2
+		{
+			std::cout << i << ",";
+		}
+		std::cout << "\n";
+		//valores validos
+		do
+		{
+			std::cin >> menu;
+		} while (e.pisoInicial > menu && e.rangoAscensor < menu);
+		e.pisoActual = menu;
+		Grafico(e);
+	}
+};
+void Tope(Edificio e)
+{
+
+};
+void Intermedio(Edificio e) 
+{
+
 };

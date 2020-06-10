@@ -1,5 +1,4 @@
 ﻿  1-FuncionalElevador.cpp
-C:\0-Cursos\C++\trabajoPractico2\TrabajoPractico2\1-FuncionalElevador.cpp(30,6): warning C4101: 'pisoInicial': variable local sin referencia
-C:\0-Cursos\C++\trabajoPractico2\TrabajoPractico2\1-FuncionalElevador.cpp(132,34): warning C4018: '>': no coinciden signed/unsigned
-C:\0-Cursos\C++\trabajoPractico2\TrabajoPractico2\1-FuncionalElevador.cpp(146,12): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
-  TrabajoPractico2.vcxproj -> C:\0-Cursos\C++\trabajoPractico2\TrabajoPractico2\Debug\TrabajoPractico2.exe
+C:\0-Cursos\C++\ImageCampus\trabajoPractico2\TrabajoPractico2\1-FuncionalElevador.cpp(32,6): warning C4101: 'pisoInicial': variable local sin referencia
+C:\0-Cursos\C++\ImageCampus\trabajoPractico2\TrabajoPractico2\1-FuncionalElevador.cpp(116,12): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
+  TrabajoPractico2.vcxproj -> C:\0-Cursos\C++\ImageCampus\trabajoPractico2\TrabajoPractico2\Debug\TrabajoPractico2.exe
