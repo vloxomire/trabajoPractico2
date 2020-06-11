@@ -1,0 +1,2 @@
+C:\0-Cursos\C++\trabajoPractico2\TrabajoPractico2\x64\Debug\TrabajoPractico2.exe
+C:\0-Cursos\C++\trabajoPractico2\TrabajoPractico2\x64\Debug\TrabajoPractico2.pdb

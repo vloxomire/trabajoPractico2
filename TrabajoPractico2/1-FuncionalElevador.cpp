@@ -18,6 +18,8 @@ short PisoRandom(Edificio e);
 void Grafico(Edificio e);
 void Mover(Edificio e,short);
 void Inicio(Edificio e, short);
+void Tope(Edificio e, short);
+void Intermedio(Edificio e, short);
 
 int
 main()
@@ -55,58 +57,9 @@ void Mover(Edificio e,short a)
 	a = e.pisoActual;
 	do
 	{
-		//piso en 0
 		Inicio(e,menu);
-
-		//PISO FINAL
-		if (e.pisoActual == e.pisoFinal)
-		{//muestra los pisos a subir
-			std::cout << "puede bajar " << std::endl;
-			std::cout << " A los pisos ";
-			//me da los pisos
-			for (short i = e.pisoFinal; i > e.pisoFinal - e.rangoAscensor; i--)
-			{
-				std::cout << i - 1 << ",";
-			}
-			std::cout << "\n";
-			//valores validos
-			do
-			{
-				std::cin >> menu;
-			} while (menu>e.pisoFinal && menu< e.pisoFinal - e.rangoAscensor);
-			e.pisoActual = menu;
-			Grafico(e);
-		}
-		//ENTRE PISOS
-		else
-		{
-			std::cout << "puede subir " << std::endl;
-			std::cout << " A los pisos ";
-			for (short i = e.pisoActual + 1; i <= e.pisoFinal; i++)
-			{
-				if (i <= e.pisoActual+ e.rangoAscensor)
-				{
-					std::cout << i << ",";
-				}
-			}
-			std::cout << "\n";
-			std::cout << "o bajar " << std::endl;
-			std::cout << " A los pisos ";
-			for (short i = e.pisoActual; i > e.pisoActual - e.rangoAscensor; i--)//3>=(3-2)
-			{
-				if (i >= e.pisoInicial)
-				{
-					std::cout << i << ",";
-				}
-			}
-			std::cout << "\n";
-			do
-			{
-				std::cin >> menu;
-			} while (menu<e.pisoInicial && menu>e.pisoFinal);
-			e.pisoActual = menu;
-			Grafico(e);
-		}
+		Tope(e, menu);
+		Intermedio(e, menu);
 	} while (e.pisoActual != 0);
 }
 short PisoRandom(Edificio e)
@@ -119,7 +72,7 @@ short PisoRandom(Edificio e)
 	Grafico(e);
 	return aux;
 };
-void Inicio(Edificio e, short m) 
+short Inicio(Edificio e, short m) 
 {
 	short menu = m;
 	if (e.pisoActual == 0)
@@ -138,14 +91,64 @@ void Inicio(Edificio e, short m)
 			std::cin >> menu;
 		} while (e.pisoInicial > menu && e.rangoAscensor < menu);
 		e.pisoActual = menu;
+		m=menu;
+		Grafico(e);
+		//falta retornar un valor para q lo agarre el otro
+	}
+	return m;
+};
+void Tope(Edificio e,short m)
+{
+	short menu = m;
+	if (e.pisoActual == e.pisoFinal)
+	{//muestra los pisos a subir
+		std::cout << "puede bajar " << std::endl;
+		std::cout << " A los pisos ";
+		//me da los pisos
+		for (short i = e.pisoFinal; i > e.pisoFinal - e.rangoAscensor; i--)
+		{
+			std::cout << i - 1 << ",";
+		}
+		std::cout << "\n";
+		//valores validos
+		do
+		{
+			std::cin >> menu;
+		} while (menu > e.pisoFinal && menu < e.pisoFinal - e.rangoAscensor);
+		e.pisoActual = menu;
 		Grafico(e);
 	}
 };
-void Tope(Edificio e)
+void Intermedio(Edificio e,short m) 
 {
-
-};
-void Intermedio(Edificio e) 
-{
-
+	short menu = m;
+	if (e.pisoActual > e.pisoInicial && e.pisoActual < e.pisoFinal)
+	{
+		std::cout << "puede subir " << std::endl;
+		std::cout << " A los pisos ";
+		for (short i = e.pisoActual + 1; i <= e.pisoFinal; i++)
+		{
+			if (i <= e.pisoActual + e.rangoAscensor)
+			{
+				std::cout << i << ",";
+			}
+		}
+		std::cout << "\n";
+		std::cout << "o bajar " << std::endl;
+		std::cout << " A los pisos ";
+		for (short i = e.pisoActual; i > e.pisoActual - e.rangoAscensor; i--)//3>=(3-2)
+		{
+			if (i >= e.pisoInicial)
+			{
+				std::cout << i << ",";
+			}
+		}
+		std::cout << "\n";
+		do
+		{
+			std::cin >> menu;
+		} while (menu<e.pisoInicial && menu>e.pisoFinal);
+		e.pisoActual = menu;
+		Grafico(e);
+	}
 };
