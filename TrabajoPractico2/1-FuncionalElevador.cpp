@@ -17,9 +17,9 @@ struct Edificio
 short PisoRandom(Edificio e);
 void Grafico(Edificio e);
 void Mover(Edificio e,short);
-void Inicio(Edificio e, short);
-void Tope(Edificio e, short);
-void Intermedio(Edificio e, short);
+short Inicio(Edificio e, short&);
+short Tope(Edificio e, short&);
+short Intermedio(Edificio e, short&);
 
 int
 main()
@@ -57,9 +57,9 @@ void Mover(Edificio e,short a)
 	a = e.pisoActual;
 	do
 	{
-		Inicio(e,menu);
-		Tope(e, menu);
-		Intermedio(e, menu);
+		e.pisoActual=Inicio(e,menu);
+		e.pisoActual = Tope(e, menu);
+		e.pisoActual = Intermedio(e, menu);
 	} while (e.pisoActual != 0);
 }
 short PisoRandom(Edificio e)
@@ -72,7 +72,7 @@ short PisoRandom(Edificio e)
 	Grafico(e);
 	return aux;
 };
-short Inicio(Edificio e, short m) 
+short Inicio(Edificio e, short& m) 
 {
 	short menu = m;
 	if (e.pisoActual == 0)
@@ -91,13 +91,12 @@ short Inicio(Edificio e, short m)
 			std::cin >> menu;
 		} while (e.pisoInicial > menu && e.rangoAscensor < menu);
 		e.pisoActual = menu;
-		m=menu;
 		Grafico(e);
 		//falta retornar un valor para q lo agarre el otro
 	}
-	return m;
+	return e.pisoActual;
 };
-void Tope(Edificio e,short m)
+short Tope(Edificio e,short& m)
 {
 	short menu = m;
 	if (e.pisoActual == e.pisoFinal)
@@ -118,8 +117,9 @@ void Tope(Edificio e,short m)
 		e.pisoActual = menu;
 		Grafico(e);
 	}
+	return e.pisoActual;
 };
-void Intermedio(Edificio e,short m) 
+short Intermedio(Edificio e,short& m) 
 {
 	short menu = m;
 	if (e.pisoActual > e.pisoInicial && e.pisoActual < e.pisoFinal)
@@ -151,4 +151,5 @@ void Intermedio(Edificio e,short m)
 		e.pisoActual = menu;
 		Grafico(e);
 	}
+	return e.pisoActual;
 };
