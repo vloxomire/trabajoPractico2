@@ -2,7 +2,7 @@
 /*● Un ​I​ representa el cable del ascensor en un piso.  ● A ​representa el ascensor.    De contar con 5 pisos y estar en el 2,
 la situación se vería así:  I  I  A  I  I    Debemos ir actualizando la posición del ascensor paso a paso tal como hacíamos antes
 y seguir indicando antes o después del gráfico mediante texto donde se encuentra el  ascensor.*/
-#include<iostream>
+/*#include<iostream>
 #include<stdio.h>
 #include<time.h>
 struct Edificio
@@ -152,4 +152,4 @@ short Intermedio(Edificio e,short& m)
 		Grafico(e);
 	}
 	return e.pisoActual;
-};
+};*/
