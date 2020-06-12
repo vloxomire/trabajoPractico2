@@ -49,14 +49,13 @@ main()
 	Mover(edificio, aux,estPer);
 	return 0;
 }
- short Persona(Edificio e,EstPersona p) 
+ void Persona(Edificio e,EstPersona p) 
 {
 	 //Donde va a estar la persona
 	p.persona = rand() % e.pisoFinal+1;
 	std::cout << "La persona se encuentra en el piso "<<p.persona<<std::endl;
 	//No me devuelve el piso de destino
-	p.destino=PisoDestino(e,p);
-	return 0;
+	p.destino=PisoDestino(e,p.persona);
 };
 void Grafico(Edificio e,EstPersona p)
 {
@@ -103,6 +102,7 @@ void Mover(Edificio e, short a,EstPersona p)
 		e.pisoActual = Intermedio(e,menu, p);
 	} while (e.pisoActual != 0);
 }
+
 short PisoRandom(Edificio e,EstPersona p)
 {
 	srand(time(NULL));
