@@ -10,127 +10,165 @@ Consejo: Investigar sobre ​ Sleep ​ y como funciona para manejar el delay*/
 #include<iostream>
 #include<stdio.h>
 #include<time.h>
-struct Edificio
+
+using namespace std;
+
+struct EDIFICIO
 {
-	short pisoFinal = 5;
+	short pisoFinal = 10;
 	short pisoInicial = 0;
-	short pisoActual = 0;
-	short pisoRandom = 0;
-	short rangoAscensor = 2;
-	short menu = 0;
+	short pEstaAscensor = 0;
 };
-struct EstPersona 
+struct EPERSONA 
 {
-	short persona = 0;
-	short destino = 0;
+	short dondeEsta = 0;
+	short dondeVa = 0;
 };
-short Persona(Edificio e, EstPersona p);
-short PisoRandom(Edificio e, EstPersona p);
-short PisoDestino(Edificio e, EstPersona p);
-void Grafico(Edificio e, EstPersona p);
-void Mover(Edificio e, short, EstPersona p);
-short Inicio(Edificio e, short& m, EstPersona p);
-short Tope(Edificio e, short& m, EstPersona p);
-short Intermedio(Edificio e, short& m, EstPersona p);
+
+void SetPersona(EPERSONA& per,EDIFICIO e);
+void DondeEstaPj(EPERSONA& per, EDIFICIO edif);
+void DondeVaPj(EPERSONA& per, EDIFICIO edif);
+void SetEdificio(EDIFICIO& edi);
+void ApareceAscensor(EDIFICIO& e);
+void Grafico(EDIFICIO e, EPERSONA p);
+void Mover(EDIFICIO e, short, EPERSONA p);
+short Inicio(EDIFICIO e, short& m, EPERSONA p);
+short Tope(EDIFICIO e, short& m, EPERSONA p);
+short Intermedio(EDIFICIO e, short& m, EPERSONA p);
 
 int
 main()
 {
+	srand(time(NULL));
 	short aux = 0;
-	Edificio edificio;
-	EstPersona estPer;
-	std::cout << "Ingrese la cantidad de pisos\n";
-	//std::cin >> pisos;
-	std::cout << "Ingrese el rango del ascensor\n";
-	//std::cin >> rangoAsc;
-
-	Persona(edificio,estPer);
-	aux = PisoRandom(edificio,estPer);
-	Mover(edificio, aux,estPer);
+	EDIFICIO edificio;
+	EPERSONA estPer;
+	
+	SetPersona(estPer,edificio);
+	SetEdificio(edificio);
+	Grafico(edificio,estPer);
+	Mover(edificio, aux,estPer);//ver mover q onda?
 	return 0;
 }
- void Persona(Edificio e,EstPersona p) 
+
+void SetPersona(EPERSONA& per,EDIFICIO edif) 
 {
-	 //Donde va a estar la persona
-	p.persona = rand() % e.pisoFinal+1;
-	std::cout << "La persona se encuentra en el piso "<<p.persona<<std::endl;
-	//No me devuelve el piso de destino
-	p.destino=PisoDestino(e,p.persona);
+	DondeEstaPj(per,edif);
+	DondeVaPj(per,edif);
+	cout << "La persona se encuentra en el piso: " << per.dondeEsta << endl;
+	cout << "El piso de destino es: " << per.dondeVa << endl;
 };
-void Grafico(Edificio e,EstPersona p)
+
+ void DondeEstaPj(EPERSONA& per,EDIFICIO edif)
 {
+	 //Setea el piso al q aparece la persona
+	per.dondeEsta = rand() % edif.pisoFinal+1;
+};
+
+ void DondeVaPj(EPERSONA& pe, EDIFICIO edi)
+ {
+	 pe.dondeVa = rand() % edi.pisoFinal;
+	 while (pe.dondeVa == pe.dondeEsta)
+	 {
+		 pe.dondeVa = rand() % edi.pisoFinal;
+	 }
+ };
+
+ void SetEdificio(EDIFICIO& edi)
+ {
+	 ApareceAscensor(edi);
+	 cout << "El ascensor esta en el piso: " << edi.pEstaAscensor << endl;
+ };
+
+ void ApareceAscensor(EDIFICIO& edi)
+ {
+	 edi.pEstaAscensor = rand() % edi.pisoFinal;
+ };
+
+void Grafico(EDIFICIO e,EPERSONA p)
+{//Con un for reccorro del final al comienzo
 	for (short i = e.pisoFinal; i >= e.pisoInicial; i--)
 	{
-		if (i == e.pisoActual)
+		if (i<10)
 		{
-			std::cout << i << ")" << 'A';
-			if (i==p.persona)
+			if (i == e.pEstaAscensor)
 			{
-				std::cout<<" "<< 'P' << std::endl;
-			}
-			else 
-			{
-				std::cout << std::endl;
-			}
-		}
-		else
-		{
-			std::cout << i << ")" << 'I';
-			if (i == p.persona)
-			{
-				std::cout << " " << 'P' << std::endl;
-			}
-			if (i == p.destino)
-			{
-				std::cout << " " << 'D' << std::endl;
+				cout<<'0' << i << ")" << 'A';
+
+				if (i == p.dondeEsta)//Pregunta por la persona
+				{
+					cout << " " << 'P';
+				}
+				cout << endl;
 			}
 			else
 			{
-				std::cout << std::endl;
+				cout << '0' << i << ")" << 'I';
+				if (i == p.dondeEsta)
+				{
+					cout << " " << 'P';
+				}
+				if (i == p.dondeVa)
+				{
+					cout << " " << 'D';
+				}
+				cout << endl;
 			}
 		}
+		else 
+		{
+			if (i == e.pEstaAscensor)
+			{
+				cout << i << ")" << 'A';
+
+				if (i == p.dondeEsta)//Pregunta por la persona
+				{
+					cout << " " << 'P';
+				}
+				cout << endl;
+			}
+			else
+			{
+				cout << i << ")" << 'I';
+				if (i == p.dondeEsta)
+				{
+					cout << " " << 'P';
+				}
+				if (i == p.dondeVa)
+				{
+					cout << " " << 'D';
+				}
+				cout << endl;
+			}
+		}
+
 	}
-}
-void Mover(Edificio e, short a,EstPersona p)
-{
-	short menu = 0;
-	a = e.pisoActual;
-	do
-	{
-		e.pisoActual = Inicio(e, menu, p);
-		e.pisoActual = Tope(e, menu,  p);
-		e.pisoActual = Intermedio(e,menu, p);
-	} while (e.pisoActual != 0);
 }
 
-short PisoRandom(Edificio e,EstPersona p)
+void Mover(EDIFICIO e, short a,EPERSONA p)
 {
-	srand(time(NULL));
-	e.pisoRandom = rand() % e.pisoFinal;
-	e.pisoActual = e.pisoRandom;
-	std::cout << "Piso Actual " << e.pisoActual << std::endl;
-	Grafico(e,p);
-	return e.pisoActual;
-};
-short PisoDestino(Edificio e,EstPersona p)
-{
-	p.destino= rand() % e.pisoFinal;
-	while (p.destino==p.persona)
+	short menu = 0;
+	a = e.pEstaAscensor;
+	do
 	{
-		p.destino = rand() % e.pisoFinal;
-	}
-	std::cout << "El piso de destino es "<< p.destino << std::endl;
-	return p.destino;
-};
-short Inicio(Edificio e, short& m, EstPersona p)
+		e.pEstaAscensor = Inicio(e, menu, p);
+		e.pEstaAscensor = Tope(e, menu,  p);
+		e.pEstaAscensor = Intermedio(e,menu, p);
+	} while (e.pEstaAscensor != 0);
+}
+
+
+
+
+short Inicio(EDIFICIO e, short& m, EPERSONA p)
 {
 	short menu = m;
-	if (e.pisoActual == 0)
+	if (e.pEstaAscensor == 0)
 	{//muestra los pisos a subir
 		std::cout << "puede subir " << std::endl;
 		std::cout << " A los pisos ";
 		//me da los pisos
-		for (short i = e.pisoInicial + 1; i <= e.rangoAscensor; i++)//0<2
+		/*for (short i = e.pisoInicial + 1; i <= e.rangoAscensor; i++)//0<2
 		{
 			std::cout << i << ",";
 		}
@@ -139,67 +177,67 @@ short Inicio(Edificio e, short& m, EstPersona p)
 		do
 		{
 			std::cin >> menu;
-		} while (e.pisoInicial > menu && e.rangoAscensor < menu);
-		e.pisoActual = menu;
+		} while (e.pisoInicial > menu && e.rangoAscensor < menu);*/
+		e.pEstaAscensor = menu;
 		Grafico(e,p);
 		//falta retornar un valor para q lo agarre el otro
 	}
-	return e.pisoActual;
+	return e.pEstaAscensor;
 };
-short Tope(Edificio e, short& m, EstPersona p)
+short Tope(EDIFICIO e, short& m, EPERSONA p)
 {
 	short menu = m;
-	if (e.pisoActual == e.pisoFinal)
+	if (e.pEstaAscensor == e.pisoFinal)
 	{//muestra los pisos a subir
 		std::cout << "puede bajar " << std::endl;
 		std::cout << " A los pisos ";
 		//me da los pisos
-		for (short i = e.pisoFinal; i > e.pisoFinal - e.rangoAscensor; i--)
+		/*for (short i = e.pisoFinal; i > e.pisoFinal - e.rangoAscensor; i--)
 		{
 			std::cout << i - 1 << ",";
-		}
+		}*/
 		std::cout << "\n";
 		//valores validos
-		do
+		/*do
 		{
 			std::cin >> menu;
-		} while (menu > e.pisoFinal && menu < e.pisoFinal - e.rangoAscensor);
-		e.pisoActual = menu;
+		} while (menu > e.pisoFinal && menu < e.pisoFinal - e.rangoAscensor);*/
+		e.pEstaAscensor = menu;
 		Grafico(e,p);
 	}
-	return e.pisoActual;
+	return e.pEstaAscensor;
 };
-short Intermedio(Edificio e, short& m, EstPersona p)
+short Intermedio(EDIFICIO e, short& m, EPERSONA p)
 {
 	short menu = m;
-	if (e.pisoActual > e.pisoInicial && e.pisoActual < e.pisoFinal)
+	if (e.pEstaAscensor > e.pisoInicial && e.pEstaAscensor < e.pisoFinal)
 	{
 		std::cout << "puede subir " << std::endl;
 		std::cout << " A los pisos ";
-		for (short i = e.pisoActual + 1; i <= e.pisoFinal; i++)
+		for (short i = e.pEstaAscensor + 1; i <= e.pisoFinal; i++)
 		{
-			if (i <= e.pisoActual + e.rangoAscensor)
+			/*if (i <= e.pisoActual + e.rangoAscensor)
 			{
 				std::cout << i << ",";
-			}
+			}*/
 		}
 		std::cout << "\n";
 		std::cout << "o bajar " << std::endl;
 		std::cout << " A los pisos ";
-		for (short i = e.pisoActual; i > e.pisoActual - e.rangoAscensor; i--)//3>=(3-2)
+		/*for (short i = e.pisoActual; i > e.pisoActual - e.rangoAscensor; i--)//3>=(3-2)
 		{
 			if (i >= e.pisoInicial)
 			{
 				std::cout << i << ",";
 			}
-		}
+		}*/
 		std::cout << "\n";
 		do
 		{
 			std::cin >> menu;
 		} while (menu<e.pisoInicial && menu>e.pisoFinal);
-		e.pisoActual = menu;
+		e.pEstaAscensor = menu;
 		Grafico(e,p);
 	}
-	return e.pisoActual;
+	return e.pEstaAscensor;
 };
