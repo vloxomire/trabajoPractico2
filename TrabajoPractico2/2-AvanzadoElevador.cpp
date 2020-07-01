@@ -10,6 +10,7 @@ Consejo: Investigar sobre ​ Sleep ​ y como funciona para manejar el delay*/
 #include<iostream>
 #include<stdio.h>
 #include<time.h>
+#include<Windows.h>
 
 using namespace std;
 
@@ -17,12 +18,12 @@ struct EDIFICIO
 {
 	short pisoFinal = 10;
 	short pisoInicial = 0;
-	short pEstaAscensor = 0;
+	short pisoActual = 0;
 };
 struct EPERSONA 
 {
 	short dondeEsta = 0;
-	short dondeVa = 0;
+	short destino = 0;
 };
 
 void SetPersona(EPERSONA& per,EDIFICIO e);
@@ -32,22 +33,23 @@ void SetEdificio(EDIFICIO& edi);
 void ApareceAscensor(EDIFICIO& e);
 void Grafico(EDIFICIO e, EPERSONA p);
 void Mover(EDIFICIO e, short, EPERSONA p);
-short Inicio(EDIFICIO e, short& m, EPERSONA p);
-short Tope(EDIFICIO e, short& m, EPERSONA p);
-short Intermedio(EDIFICIO e, short& m, EPERSONA p);
 
 int
 main()
 {
 	srand(time(NULL));
 	short aux = 0;
+	short contadorGaux = 0;
 	EDIFICIO edificio;
 	EPERSONA estPer;
-	
-	SetPersona(estPer,edificio);
-	SetEdificio(edificio);
-	Grafico(edificio,estPer);
-	Mover(edificio, aux,estPer);//ver mover q onda?
+	do
+	{
+		SetPersona(estPer, edificio);
+		SetEdificio(edificio);
+		Grafico(edificio, estPer);
+		Mover(edificio, aux, estPer);
+		contadorGaux++;
+	} while (contadorGaux!=2);
 	return 0;
 }
 
@@ -56,7 +58,7 @@ void SetPersona(EPERSONA& per,EDIFICIO edif)
 	DondeEstaPj(per,edif);
 	DondeVaPj(per,edif);
 	cout << "La persona se encuentra en el piso: " << per.dondeEsta << endl;
-	cout << "El piso de destino es: " << per.dondeVa << endl;
+	cout << "El piso de destino es: " << per.destino << endl;
 };
 
  void DondeEstaPj(EPERSONA& per,EDIFICIO edif)
@@ -67,31 +69,32 @@ void SetPersona(EPERSONA& per,EDIFICIO edif)
 
  void DondeVaPj(EPERSONA& pe, EDIFICIO edi)
  {
-	 pe.dondeVa = rand() % edi.pisoFinal;
-	 while (pe.dondeVa == pe.dondeEsta)
+	 pe.destino = rand() % edi.pisoFinal;
+	 while (pe.destino == pe.dondeEsta)
 	 {
-		 pe.dondeVa = rand() % edi.pisoFinal;
+		 pe.destino = rand() % edi.pisoFinal;
 	 }
  };
 
  void SetEdificio(EDIFICIO& edi)
  {
 	 ApareceAscensor(edi);
-	 cout << "El ascensor esta en el piso: " << edi.pEstaAscensor << endl;
+	 cout << "El ascensor esta en el piso: " << edi.pisoActual << endl;
  };
 
  void ApareceAscensor(EDIFICIO& edi)
  {
-	 edi.pEstaAscensor = rand() % edi.pisoFinal;
+	 edi.pisoActual = rand() % edi.pisoFinal;
  };
 
-void Grafico(EDIFICIO e,EPERSONA p)
+void Grafico(EDIFICIO ascensor,EPERSONA p)
 {//Con un for reccorro del final al comienzo
-	for (short i = e.pisoFinal; i >= e.pisoInicial; i--)
+	for (short i = ascensor.pisoFinal; i >= ascensor.pisoInicial; i--)
 	{
 		if (i<10)
 		{
-			if (i == e.pEstaAscensor)
+			Sleep(200);
+			if (i == ascensor.pisoActual)
 			{
 				cout<<'0' << i << ")" << 'A';
 
@@ -104,11 +107,11 @@ void Grafico(EDIFICIO e,EPERSONA p)
 			else
 			{
 				cout << '0' << i << ")" << 'I';
-				if (i == p.dondeEsta)
+				if (i == p.dondeEsta && i!=ascensor.pisoActual)
 				{
 					cout << " " << 'P';
 				}
-				if (i == p.dondeVa)
+				if (i == p.destino)
 				{
 					cout << " " << 'D';
 				}
@@ -117,7 +120,7 @@ void Grafico(EDIFICIO e,EPERSONA p)
 		}
 		else 
 		{
-			if (i == e.pEstaAscensor)
+			if (i == ascensor.pisoActual)
 			{
 				cout << i << ")" << 'A';
 
@@ -134,110 +137,51 @@ void Grafico(EDIFICIO e,EPERSONA p)
 				{
 					cout << " " << 'P';
 				}
-				if (i == p.dondeVa)
+				if (i == p.destino)
 				{
 					cout << " " << 'D';
 				}
 				cout << endl;
 			}
 		}
-
 	}
+	cout << "****************************" << endl;
 }
 
-void Mover(EDIFICIO e, short a,EPERSONA p)
+void Mover(EDIFICIO stEdificio, short a,EPERSONA stPersona)
 {
-	short menu = 0;
-	a = e.pEstaAscensor;
+	/*El ascensor se va a mover a buscara la persona
+	luego la lleva a su destino*/
+	stEdificio.pisoActual;
 	do
 	{
-		e.pEstaAscensor = Inicio(e, menu, p);
-		e.pEstaAscensor = Tope(e, menu,  p);
-		e.pEstaAscensor = Intermedio(e,menu, p);
-	} while (e.pEstaAscensor != 0);
-}
-
-
-
-
-short Inicio(EDIFICIO e, short& m, EPERSONA p)
-{
-	short menu = m;
-	if (e.pEstaAscensor == 0)
-	{//muestra los pisos a subir
-		std::cout << "puede subir " << std::endl;
-		std::cout << " A los pisos ";
-		//me da los pisos
-		/*for (short i = e.pisoInicial + 1; i <= e.rangoAscensor; i++)//0<2
+		//system("PAUSE");
+		//Buscar a la persona
+		if (stPersona.dondeEsta> stEdificio.pisoActual)
 		{
-			std::cout << i << ",";
+			stEdificio.pisoActual++;
 		}
-		std::cout << "\n";
-		//valores validos
-		do
+		else
 		{
-			std::cin >> menu;
-		} while (e.pisoInicial > menu && e.rangoAscensor < menu);*/
-		e.pEstaAscensor = menu;
-		Grafico(e,p);
-		//falta retornar un valor para q lo agarre el otro
-	}
-	return e.pEstaAscensor;
-};
-short Tope(EDIFICIO e, short& m, EPERSONA p)
-{
-	short menu = m;
-	if (e.pEstaAscensor == e.pisoFinal)
-	{//muestra los pisos a subir
-		std::cout << "puede bajar " << std::endl;
-		std::cout << " A los pisos ";
-		//me da los pisos
-		/*for (short i = e.pisoFinal; i > e.pisoFinal - e.rangoAscensor; i--)
-		{
-			std::cout << i - 1 << ",";
-		}*/
-		std::cout << "\n";
-		//valores validos
-		/*do
-		{
-			std::cin >> menu;
-		} while (menu > e.pisoFinal && menu < e.pisoFinal - e.rangoAscensor);*/
-		e.pEstaAscensor = menu;
-		Grafico(e,p);
-	}
-	return e.pEstaAscensor;
-};
-short Intermedio(EDIFICIO e, short& m, EPERSONA p)
-{
-	short menu = m;
-	if (e.pEstaAscensor > e.pisoInicial && e.pEstaAscensor < e.pisoFinal)
+			stEdificio.pisoActual--;
+		}
+		Grafico(stEdificio,stPersona);
+	} while (stEdificio.pisoActual!=stPersona.dondeEsta);
+	cout << "A subido la persona al ascensor" << endl;
+	//LLevar a destino
+	do
 	{
-		std::cout << "puede subir " << std::endl;
-		std::cout << " A los pisos ";
-		for (short i = e.pEstaAscensor + 1; i <= e.pisoFinal; i++)
+		if (stEdificio.pisoActual<stPersona.destino)
 		{
-			/*if (i <= e.pisoActual + e.rangoAscensor)
-			{
-				std::cout << i << ",";
-			}*/
+			stEdificio.pisoActual++;
+			stPersona.dondeEsta = stEdificio.pisoActual;
 		}
-		std::cout << "\n";
-		std::cout << "o bajar " << std::endl;
-		std::cout << " A los pisos ";
-		/*for (short i = e.pisoActual; i > e.pisoActual - e.rangoAscensor; i--)//3>=(3-2)
+		else
 		{
-			if (i >= e.pisoInicial)
-			{
-				std::cout << i << ",";
-			}
-		}*/
-		std::cout << "\n";
-		do
-		{
-			std::cin >> menu;
-		} while (menu<e.pisoInicial && menu>e.pisoFinal);
-		e.pEstaAscensor = menu;
-		Grafico(e,p);
-	}
-	return e.pEstaAscensor;
-};
+			stEdificio.pisoActual--;
+			stPersona.dondeEsta = stEdificio.pisoActual;
+		}
+		Grafico(stEdificio, stPersona);
+	} while (stEdificio.pisoActual != stPersona.destino);
+	cout << "Se a dejado a la persona en el piso de destino "<< stPersona.destino << endl;
+}
