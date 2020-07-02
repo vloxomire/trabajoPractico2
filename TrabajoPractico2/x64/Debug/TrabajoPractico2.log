@@ -1,3 +1,7 @@
-﻿  2-AvanzadoElevador.cpp
-C:\0-Cursos\C++\ImageCampus\trabajoPractico2\TrabajoPractico2\2-AvanzadoElevador.cpp(40,12): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
-  TrabajoPractico2.vcxproj -> C:\0-Cursos\C++\ImageCampus\trabajoPractico2\TrabajoPractico2\x64\Debug\TrabajoPractico2.exe
+﻿  0-BasicoElevator.cpp
+  1-FuncionalElevador.cpp
+  2-AvanzadoElevador.cpp
+C:\0-Cursos\C++\trabajoPractico2\TrabajoPractico2\2-AvanzadoElevador.cpp(40,12): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
+  Generando código...
+  LINK : no se encontró C:\0-Cursos\C++\trabajoPractico2\TrabajoPractico2\x64\Debug\TrabajoPractico2.exe o no lo generó el último vínculo incremental; ejecutando vínculo completo
+  TrabajoPractico2.vcxproj -> C:\0-Cursos\C++\trabajoPractico2\TrabajoPractico2\x64\Debug\TrabajoPractico2.exe
