@@ -1,3 +1,4 @@
+#pragma once
 #include<iostream>
 #include<stdio.h>/* NULL */
 #include<stdlib.h>/* srand, rand */
@@ -16,14 +17,9 @@ public:
 	Cliente()
 	{
 		srand(time(NULL));
-		cantidadClientes = rand();/*Random*/
+		cantidadClientes = rand()%5-1;/*Random*/
 		precio = 0;
 	};
 	void VerVariables();
-};
-
-void Cliente::VerVariables()
-{
-
 };
 

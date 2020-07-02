@@ -1,3 +1,10 @@
-﻿  Main.cpp
-C:\0-Cursos\C++\trabajoPractico2\PawnStars\Main.cpp(4,1): warning C4326: el tipo de valor devuelto de 'main' debe ser 'int' en lugar de 'void'
-  PawnStars.vcxproj -> C:\0-Cursos\C++\trabajoPractico2\TrabajoPractico2\x64\Debug\PawnStars.exe
+﻿  Cliente.cpp
+C:\0-Cursos\C++\ImageCampus\trabajoPractico2\PawnStars\Cliente.h(18,13): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
+  GestorClientes.cpp
+C:\0-Cursos\C++\ImageCampus\trabajoPractico2\PawnStars\Cliente.h(18,13): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
+  Main.cpp
+C:\0-Cursos\C++\ImageCampus\trabajoPractico2\PawnStars\Cliente.h(18,13): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
+C:\0-Cursos\C++\ImageCampus\trabajoPractico2\PawnStars\Main.cpp(7,17): warning C4930: 'GestorClientes pichones(void)': no se ha llamado a la función prototipo (¿se pensó una definición de variable?)
+  Generando código...
+  LINK : no se encontró C:\0-Cursos\C++\ImageCampus\trabajoPractico2\TrabajoPractico2\x64\Debug\PawnStars.exe o no lo generó el último vínculo incremental; ejecutando vínculo completo
+  PawnStars.vcxproj -> C:\0-Cursos\C++\ImageCampus\trabajoPractico2\TrabajoPractico2\x64\Debug\PawnStars.exe
