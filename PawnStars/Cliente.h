@@ -3,7 +3,7 @@
 #include<stdio.h>/* NULL */
 #include<stdlib.h>/* srand, rand */
 #include<time.h>/* time */
-
+enum class Rareza { BASURA, NORMAL, RARO };
 class Cliente
 {
 	//ATRIBUTOS DE LA CLASE
@@ -11,15 +11,19 @@ private:
 	//Ojo los cliente van a ser random en inicializarlos
 	short cantidadClientes;
 	short precio;
-	enum class Rareza { BASURA, NORMAL, RARO };
+	Rareza rareza;
 
 public:
-	Cliente()
-	{
-		srand(time(NULL));
-		cantidadClientes = rand()%5-1;/*Random*/
-		precio = 0;
-	};
-	void VerVariables();
+	Cliente();
+	//Getter
+	short GetCantidadCliente();
+	short GetPrecio();
+	Rareza GetRareza();
+	//Setter
+	void SetCantidadCliente();
+	void SetPrecio();
+	void SetRareza(Rareza rareza);
+
+	void GenerarItem();
 };
 

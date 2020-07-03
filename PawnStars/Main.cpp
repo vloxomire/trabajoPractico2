@@ -4,6 +4,7 @@ using namespace std;
 
 int main() 
 {
-	GestorClientes pichones();
+	GestorClientes pichones;
+	pichones.Iniciar();
 	return 0;
 }
