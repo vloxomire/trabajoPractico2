@@ -1,0 +1,7 @@
+C:\0-Cursos\C++\ImageCampus\trabajoPractico2\PawnStarsCsharp\obj\Debug\PawnStarsCsharp.csprojAssemblyReference.cache
+C:\0-Cursos\C++\ImageCampus\trabajoPractico2\PawnStarsCsharp\obj\Debug\PawnStarsCsharp.csproj.CoreCompileInputs.cache
+C:\0-Cursos\C++\ImageCampus\trabajoPractico2\PawnStarsCsharp\bin\Debug\PawnStarsCsharp.exe.config
+C:\0-Cursos\C++\ImageCampus\trabajoPractico2\PawnStarsCsharp\bin\Debug\PawnStarsCsharp.exe
+C:\0-Cursos\C++\ImageCampus\trabajoPractico2\PawnStarsCsharp\bin\Debug\PawnStarsCsharp.pdb
+C:\0-Cursos\C++\ImageCampus\trabajoPractico2\PawnStarsCsharp\obj\Debug\PawnStarsCsharp.exe
+C:\0-Cursos\C++\ImageCampus\trabajoPractico2\PawnStarsCsharp\obj\Debug\PawnStarsCsharp.pdb

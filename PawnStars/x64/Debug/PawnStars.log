@@ -1,4 +1,11 @@
-﻿  GestorClientes.cpp
-C:\0-Cursos\C++\trabajoPractico2\PawnStars\GestorClientes.h(11,25): warning C4200: se ha utilizado una extensión no estándar: matriz de tamaño cero en struct/union
-C:\0-Cursos\C++\trabajoPractico2\PawnStars\GestorClientes.h(11,25): message : Un constructor con valor predeterminado o un operador de asignación de copia o movimiento ignorará a este miembro.
-  PawnStars.vcxproj -> C:\0-Cursos\C++\trabajoPractico2\TrabajoPractico2\x64\Debug\PawnStars.exe
+﻿  Cliente.cpp
+C:\0-Cursos\C++\ImageCampus\trabajoPractico2\PawnStars\Cliente.cpp(6,12): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
+  GestorClientes.cpp
+C:\0-Cursos\C++\ImageCampus\trabajoPractico2\PawnStars\GestorClientes.h(11,25): warning C4200: se ha utilizado una extensión no estándar: matriz de tamaño cero en struct/union
+C:\0-Cursos\C++\ImageCampus\trabajoPractico2\PawnStars\GestorClientes.h(11,25): message : Un constructor con valor predeterminado o un operador de asignación de copia o movimiento ignorará a este miembro.
+  Main.cpp
+C:\0-Cursos\C++\ImageCampus\trabajoPractico2\PawnStars\GestorClientes.h(11,25): warning C4200: se ha utilizado una extensión no estándar: matriz de tamaño cero en struct/union
+C:\0-Cursos\C++\ImageCampus\trabajoPractico2\PawnStars\GestorClientes.h(11,25): message : Un constructor con valor predeterminado o un operador de asignación de copia o movimiento ignorará a este miembro.
+  Generando código...
+  LINK : no se encontró C:\0-Cursos\C++\ImageCampus\trabajoPractico2\TrabajoPractico2\x64\Debug\PawnStars.exe o no lo generó el último vínculo incremental; ejecutando vínculo completo
+  PawnStars.vcxproj -> C:\0-Cursos\C++\ImageCampus\trabajoPractico2\TrabajoPractico2\x64\Debug\PawnStars.exe
